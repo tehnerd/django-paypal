@@ -8,7 +8,7 @@ from paypal.standard.pdt.forms import PayPalPDTForm
  
  
 @require_GET
-def pdt(request, item_check_callable=None, template="pdt/pdt.html", context=None):
+def pdt(request, item_check_callable=None, template="storry_auth/paypal_return.html", context=None):
     """Payment data transfer implementation: http://tinyurl.com/c9jjmw"""
     context = context or {}
     pdt_obj = None
