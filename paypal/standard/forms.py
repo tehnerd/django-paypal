@@ -100,10 +100,15 @@ class PayPalPaymentsForm(forms.Form):
         self.button_type = button_type
 
     def render(self):
+        """Use the sandbox when in DEBUG mode so we dont need to use .sandbox in template"""
+        if getattr(settings, 'PAYPAL_DEBUG', settings.DEBUG):
+            paypal_endpoint=SANDBOX_POSTBACK_ENDPOINT
+        else:
+            paypal_endpoint=POSTBACK_ENDPOINT
         return mark_safe(u"""<form action="%s" method="post" target="_blank">
     %s
 <input type="submit" class="catalog-act pointer" id="paym-action" value="оформить подписку">
-</form>""" % (POSTBACK_ENDPOINT, self.as_p()))
+</form>""" % (paypal_endpoint, self.as_p()))
         
         
     def sandbox(self):
